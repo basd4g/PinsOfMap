@@ -9,9 +9,10 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     let manager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet var longPressGesRec: UILongPressGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,5 +41,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("error = \(error)")
     }
 
+    @IBAction func mapViewDidLongPress(_ sender: UIGestureRecognizer) {
+        if sender.state == .began {
+            //tap start
+            print(".start")
+        } else if sender.state == .ended {
+            //tap finish
+            print(".finish")
+        }
+    }
 }
 
