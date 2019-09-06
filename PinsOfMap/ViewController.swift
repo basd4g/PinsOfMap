@@ -14,6 +14,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var longPressGesRec: UILongPressGestureRecognizer!
     
+    var pinsCount: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         manager.delegate = self
@@ -51,10 +53,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             let tapPoint = sender.location(in: view)
             let center = mapView.convert(tapPoint, toCoordinateFrom: mapView)
             
-            let lonStr = center.longitude.description
-            let latStr = center.latitude.description
-            print("lon : " + lonStr)
-            print("lat : " + latStr)
+            let pin : MKPointAnnotation = MKPointAnnotation()
+            pin.coordinate = center
+            pinsCount += 1
+            pin.title = "Pin\(pinsCount)"
+//            pin.subtitle = "サブタイトル（ピンをタップすると表示される）"
+            mapView.addAnnotation(pin)
         }
     }
 }
