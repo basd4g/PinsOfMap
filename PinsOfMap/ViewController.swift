@@ -48,6 +48,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         } else if sender.state == .ended {
             //tap finish
             print(".finish")
+            let tapPoint = sender.location(in: view)
+            let center = mapView.convert(tapPoint, toCoordinateFrom: mapView)
+            
+            let lonStr = center.longitude.description
+            let latStr = center.latitude.description
+            print("lon : " + lonStr)
+            print("lat : " + latStr)
         }
     }
 }
