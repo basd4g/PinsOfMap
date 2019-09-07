@@ -78,6 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         pin.title = "Pin\(pinsCount)"
 //        pin.subtitle = "subtitle（show if you tapped）"
         mapView.addAnnotation(pin)
+        showPoint(point: point)
     }
     func showPoint(point: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: point, latitudinalMeters: 500, longitudinalMeters: 500)
