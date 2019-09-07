@@ -30,6 +30,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         self.view.addSubview(compass)
         // デフォルトのコンパスを非表示にする
         mapView.showsCompass = false
+        
+        // スケールバーの表示
+        let scale = MKScaleView(mapView: mapView)
+        scale.frame.origin.x = 15
+        scale.frame.origin.y = 45
+        scale.legendAlignment = .leading
+        self.view.addSubview(scale)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
