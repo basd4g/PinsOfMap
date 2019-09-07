@@ -15,6 +15,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     @IBOutlet var longPressGesRec: UILongPressGestureRecognizer!
     
     var pinsCount: Int = 0
+    var nowLocationCoordinate: CLLocationCoordinate2D?
+    var nowLocationLoading: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         scale.legendAlignment = .leading
         self.view.addSubview(scale)
         
+        //nowLocationボタン
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.addTarget(self, action: #selector(nowLocationTapped(_:)), for: UIControl.Event.touchUpInside)
+        button.setTitle("hello", for: .normal)
+        button.frame = CGRect(x: self.view.bounds.width - 50, y: 100, width: 40, height: 40)
+        let image = UIImage(named: "neer-me")
+        button.setImage(image!, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        self.view.addSubview(button)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -49,12 +61,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("locations: \(locations)")
         
-        showPoint(point: locations[0].coordinate)
+        nowLocationCoordinate = locations[0].coordinate
+        nowLocationLoading = false
     }
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error = \(error)")
+        nowLocationLoading = false
     }
 
     @IBAction func mapViewDidLongPress(_ sender: UIGestureRecognizer) {
@@ -84,6 +98,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     func showPoint(point: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: point, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
+    }
+    @objc func nowLocationTapped(_ sender: UIButton) {
+        if nowLocationCoordinate == nil {
+            var title: String = ""
+            var message: String = ""
+            if nowLocationLoading == false {
+                title = "現在地を読み込み中"
+                message = "しばらくお待ちください"
+            } else {
+                title = "現在地が不明"
+                message = "現在地の読み込みに失敗しました"
+            }
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+            let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
+            alert.addAction(okayButton)
+            return
+        }
+        showPoint(point: nowLocationCoordinate!)
     }
 }
 

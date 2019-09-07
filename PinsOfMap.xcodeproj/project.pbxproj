@@ -26,6 +26,7 @@
 		50D717AC232233EC00EB9AF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50D717B4232375BD00EB9AF4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		50D717B62323765700EB9AF4 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		50D717C12323E47700EB9AF4 /* neer-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neer-me.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 				50D717B62323765700EB9AF4 /* FavoriteViewController.swift */,
 				50D717B4232375BD00EB9AF4 /* SearchViewController.swift */,
 				50D717A7232233EC00EB9AF4 /* Assets.xcassets */,
+				50D717C12323E47700EB9AF4 /* neer-me.png */,
 				50D717A9232233EC00EB9AF4 /* LaunchScreen.storyboard */,
 				50D717AC232233EC00EB9AF4 /* Info.plist */,
 			);
