@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
@@ -19,7 +20,44 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search bar is send")
+        print("tapped")
+        if !(searchBar.text != nil) {
+            print("error, searchBar.text = nil")
+            return
+        }
+        
+        geocoding(address: searchBar.text!)
     }
+    
+    private func geocoding(address: String){
+        var coordinate : CLLocationCoordinate2D? = nil
+        CLGeocoder().geocodeAddressString(address) { placemarks, error in
+            coordinate = placemarks?.first?.location?.coordinate
+            if coordinate == nil {
+                return
+            }
+            print("緯度:\(coordinate!.latitude), 経度:\(coordinate!.longitude)")
+            self.revGeocoding(coordinate: CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude))
 
+        }
+    }
+    
+    private func revGeocoding(coordinate: CLLocation){
+        CLGeocoder().reverseGeocodeLocation(coordinate) { placemarks, error in
+            if error != nil {
+                return
+            }
+            for placemark in placemarks! {
+                let voidStr = ""
+                print("Name = \(placemark.name ?? voidStr )")
+                print("Country = \(placemark.country ?? voidStr )")
+                print("Postal Code = \(placemark.postalCode ?? voidStr)")
+                print("Administrative Area = \(placemark.administrativeArea ?? voidStr)")
+                print("Sub Administrative Area = \(placemark.subAdministrativeArea ?? voidStr)")
+                print("Locality = \(placemark.locality ?? voidStr)")
+                print("Sub Locality = \(placemark.subLocality ?? voidStr)")
+                print("Throughfare = \(placemark.thoroughfare ?? voidStr)")
+            }
+        }
+    }
 }
