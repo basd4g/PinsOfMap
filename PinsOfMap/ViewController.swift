@@ -103,7 +103,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         if nowLocationCoordinate == nil {
             var title: String = ""
             var message: String = ""
-            if nowLocationLoading == false {
+            if nowLocationLoading == true {
                 title = "現在地を読み込み中"
                 message = "しばらくお待ちください"
             } else {
@@ -111,8 +111,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
                 message = "現在地の読み込みに失敗しました"
             }
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-            let okayButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.cancel, handler: nil)
-            alert.addAction(okayButton)
+            let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {
+                (action: UIAlertAction!) -> Void in print ("ok")})
+            alert.addAction(okButton)
+            present(alert, animated: true, completion: nil)
             return
         }
         showPoint(point: nowLocationCoordinate!)
