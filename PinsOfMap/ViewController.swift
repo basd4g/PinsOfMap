@@ -67,14 +67,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             print(".finish")
             let tapPoint = sender.location(in: view)
             let center = mapView.convert(tapPoint, toCoordinateFrom: mapView)
+            addPins(point: center)
             
-            let pin : MKPointAnnotation = MKPointAnnotation()
-            pin.coordinate = center
-            pinsCount += 1
-            pin.title = "Pin\(pinsCount)"
-//            pin.subtitle = "サブタイトル（ピンをタップすると表示される）"
-            mapView.addAnnotation(pin)
+            
         }
+    }
+    
+    func addPins(point: CLLocationCoordinate2D) {
+        let pin : MKPointAnnotation = MKPointAnnotation()
+        pin.coordinate = point
+        pinsCount += 1
+        pin.title = "Pin\(pinsCount)"
+//        pin.subtitle = "subtitle（show if you tapped）"
+        mapView.addAnnotation(pin)
+
     }
 }
 
