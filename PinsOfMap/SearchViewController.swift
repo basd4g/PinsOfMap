@@ -12,15 +12,23 @@ import MapKit
 class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var placeName: UILabel!
+    @IBOutlet weak var placeZipCode: UILabel!
+    @IBOutlet weak var placeAddress: UILabel!
+    
+    var coordinate: CLLocationCoordinate2D? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         searchBar.delegate = self
         searchBar.placeholder = "場所を検索"
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("tapped")
+        placeName.text = "施設名: "
+        placeZipCode.text = "〒: "
+        placeAddress.text = "住所: "
         if !(searchBar.text != nil) {
             print("error, searchBar.text = nil")
             return
@@ -37,27 +45,48 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                 return
             }
             print("緯度:\(coordinate!.latitude), 経度:\(coordinate!.longitude)")
-            self.revGeocoding(coordinate: CLLocation(latitude: coordinate!.latitude, longitude: coordinate!.longitude))
+            self.revGeocoding(coordinate: coordinate!)
 
         }
     }
-    
-    private func revGeocoding(coordinate: CLLocation){
-        CLGeocoder().reverseGeocodeLocation(coordinate) { placemarks, error in
-            if error != nil {
-                return
+
+    private func revGeocoding(coordinate: CLLocationCoordinate2D){
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            guard let placemark = placemarks?.first, error == nil else { return }
+
+            let voidStr = ""
+            
+            self.placeName.text = "施設名: \(placemark.name ?? voidStr)"
+            self.placeZipCode.text = "〒 \(placemark.postalCode ?? voidStr)"
+            //self.placeAddress.text = "住所: \()"
+            
+            var address = "住所: "
+            if placemark.country != "日本" && placemark.country != "Japan" {
+                address += "\(placemark.country ?? voidStr) "
             }
-            for placemark in placemarks! {
-                let voidStr = ""
-                print("Name = \(placemark.name ?? voidStr )")
-                print("Country = \(placemark.country ?? voidStr )")
-                print("Postal Code = \(placemark.postalCode ?? voidStr)")
-                print("Administrative Area = \(placemark.administrativeArea ?? voidStr)")
-                print("Sub Administrative Area = \(placemark.subAdministrativeArea ?? voidStr)")
-                print("Locality = \(placemark.locality ?? voidStr)")
-                print("Sub Locality = \(placemark.subLocality ?? voidStr)")
-                print("Throughfare = \(placemark.thoroughfare ?? voidStr)")
-            }
+            address += placemark.administrativeArea ?? ""
+            address += placemark.locality ?? ""
+            address += placemark.thoroughfare ?? ""
+            address += placemark.subThoroughfare ?? ""
+            self.placeAddress.text = address
+            
+            self.coordinate = coordinate
         }
+    }
+    @IBAction func ViewOnMapButtonTapped(_ sender: UIButton) {
+        if coordinate == nil {
+            return
+        }
+        print("will change tab (これから実装)")
+        print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
+    }
+    @IBAction func AddFavoriteButtonTapped(_ sender: UIButton) {
+        if coordinate == nil {
+            return
+        }
+        print("will change tab (これから実装)")
+        print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
+
     }
 }
