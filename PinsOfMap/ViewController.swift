@@ -22,6 +22,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         if CLLocationManager.authorizationStatus() != .authorizedWhenInUse {
             manager.requestWhenInUseAuthorization()
         }
+        
+        // コンパスの表示
+        let compass = MKCompassButton(mapView: mapView)
+        compass.compassVisibility = .visible
+        compass.frame = CGRect(x: self.view.bounds.width - 50, y: 50, width: 40, height: 40)
+        self.view.addSubview(compass)
+        // デフォルトのコンパスを非表示にする
+        mapView.showsCompass = false
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
