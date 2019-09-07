@@ -81,12 +81,4 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         print("will change tab (これから実装)")
         print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
     }
-    @IBAction func AddFavoriteButtonTapped(_ sender: UIButton) {
-        if coordinate == nil {
-            return
-        }
-        print("will change tab (これから実装)")
-        print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
-
-    }
 }
