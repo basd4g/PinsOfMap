@@ -33,10 +33,20 @@
                     <view key="view" contentMode="scaleToFill" id="BcC-ur-7MO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BEe-jD-f9p">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Kbd-mI-kD2"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="KTQ-Za-0Ia"/>
+                    <connections>
+                        <outlet property="searchBar" destination="BEe-jD-f9p" id="urd-HN-Ehb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icb-eI-0dH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
