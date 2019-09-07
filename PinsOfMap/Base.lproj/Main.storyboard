@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Favorite View Controller-->
         <scene sceneID="2zF-ui-ghk">
             <objects>
-                <viewController id="eJ7-bR-FOU" sceneMemberID="viewController">
+                <viewController id="eJ7-bR-FOU" customClass="FavoriteViewController" customModule="PinsOfMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="14e-4y-pQg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-77" y="-191"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="vOg-te-kyQ">
             <objects>
-                <viewController id="YMc-E4-t0A" sceneMemberID="viewController">
+                <viewController id="YMc-E4-t0A" customClass="SearchViewController" customModule="PinsOfMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BcC-ur-7MO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
