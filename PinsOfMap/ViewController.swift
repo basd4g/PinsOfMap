@@ -48,9 +48,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("locations: \(locations)")
         
-        let current = locations[0]
-        let region = MKCoordinateRegion(center: current.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
-        mapView.setRegion(region, animated: true)
+        showPoint(point: locations[0].coordinate)
     }
     
     
@@ -80,7 +78,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         pin.title = "Pin\(pinsCount)"
 //        pin.subtitle = "subtitle（show if you tapped）"
         mapView.addAnnotation(pin)
-
+    }
+    func showPoint(point: CLLocationCoordinate2D) {
+        let region = MKCoordinateRegion(center: point, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(region, animated: true)
     }
 }
 
