@@ -37,6 +37,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         geocoding(address: searchBar.text!)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
     private func geocoding(address: String){
         var coordinate : CLLocationCoordinate2D? = nil
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
