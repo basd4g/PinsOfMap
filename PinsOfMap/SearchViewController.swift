@@ -9,8 +9,6 @@
 import UIKit
 import MapKit
 
-var JumpCoordinate: CLLocationCoordinate2D?
-
 class SearchViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -86,14 +84,13 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             return
         }
         print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
-        JumpCoordinate = coordinate 
         
         let UINavigationController = tabBarController?.viewControllers?[0]
         tabBarController?.selectedViewController = UINavigationController
         
         if let controller: ViewController = tabBarController?.viewControllers?[0] as? ViewController {
             controller.showPoint(point: coordinate!)
-            
+        
         }
         
     }

@@ -38,10 +38,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         scale.legendAlignment = .leading
         self.view.addSubview(scale)
         
-        if JumpCoordinate != nil {
-            showPoint(point: JumpCoordinate!)
-            JumpCoordinate = nil
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
