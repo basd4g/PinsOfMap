@@ -65,7 +65,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             self.placeName.text = "施設名: \(placemark.name ?? voidStr)"
             self.placeZipCode.text = "〒 \(placemark.postalCode ?? voidStr)"
-            //self.placeAddress.text = "住所: \()"
             
             var address = "住所: "
             if placemark.country != "日本" && placemark.country != "Japan" {
@@ -86,5 +85,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
         print("will change tab (これから実装)")
         print("lat: \(coordinate!.latitude), lng: \(coordinate!.longitude)")
+        
+        
+        let UINavigationController = tabBarController?.viewControllers?[0]
+        tabBarController?.selectedViewController = UINavigationController
     }
 }
