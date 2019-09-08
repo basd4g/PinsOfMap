@@ -87,7 +87,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
     
     private func addPins(point: CLLocationCoordinate2D) {
-        GeoCoding.getNameAndAddress(latitude: point.latitude, longitude: point.longitude, callback: {
+        GeoCode.getNameAndAddress(latitude: point.latitude, longitude: point.longitude, callback: {
            (name,address) in
             let annotation : MKPointAnnotation = MKPointAnnotation()
             annotation.coordinate = point
@@ -169,64 +169,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         alert.addAction(cancelButton)
         
         present(alert, animated: true, completion: nil)
-        
-    }
-
-    private func revGeocoding(coordinate: CLLocationCoordinate2D, pin: MKPointAnnotation){
-        var retName: String?
-        var retAddress: String?
-        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            guard let placemark = placemarks?.first, error == nil else { return }
-            
-            let voidStr = ""
-            
-            retName = "\(placemark.name ?? voidStr)"
-            var address = ""
-            if placemark.country != "日本" && placemark.country != "Japan" {
-                address += "\(placemark.country ?? voidStr) "
-            }
-            address += placemark.administrativeArea ?? ""
-            address += placemark.locality ?? ""
-            address += placemark.thoroughfare ?? ""
-            address += placemark.subThoroughfare ?? ""
-            retAddress = address
-            
-            pin.title = retName
-            pin.subtitle = retAddress
-
-            PINS.add(annotation: pin, mapView: self.mapView)
-            
-            self.showPoint(point: coordinate)
-        }
     }
 }
-
-
-class GeoCoding {
-    /*
-    static func getLatitudeAndLongitude(searchWord: String, callback:(CLLocationDegrees,CLLocationDegrees)->Void) {
-        
-    }*/
-    
-    static func getNameAndAddress(latitude: CLLocationDegrees, longitude: CLLocationDegrees, callback: @escaping (String,String)->Void){
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            guard let placemark = placemarks?.first, error == nil else { return }
-            
-            let name = placemark.name ?? ""
-            var address = ""
-            if placemark.country != "日本" && placemark.country != "Japan" {
-                address += placemark.country ?? ""
-            }
-            address += placemark.administrativeArea ?? ""
-            address += placemark.locality ?? ""
-            address += placemark.thoroughfare ?? ""
-            address += placemark.subThoroughfare ?? ""
-                
-            callback(name,address)
-        }
-    }
-}
-
