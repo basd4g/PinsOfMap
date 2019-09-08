@@ -51,7 +51,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                 return
             }
             print("緯度:\(coordinate!.latitude), 経度:\(coordinate!.longitude)")
-            self.revGeocoding(coordinate: coordinate!)
+//            self.revGeocoding(coordinate: coordinate!)
+            GeoCode.getNameAndAddress(coordinate: coordinate!){
+                (name,zipCode,address) in
+                self.placeName.text = "施設名: \(name)"
+                self.placeZipCode.text = "〒 \(zipCode)"
+                self.placeAddress.text = "住所: \(address)"
+                self.coordinate = coordinate!
+            }
 
         }
     }
