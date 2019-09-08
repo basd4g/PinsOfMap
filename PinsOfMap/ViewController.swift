@@ -86,16 +86,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         }
     }
     
-    func addPins(point: CLLocationCoordinate2D) {
-        let pin : MKPointAnnotation = MKPointAnnotation()
-        pin.coordinate = point
-        pinsCount += 1
-        revGeocoding(coordinate: point, pin: pin)
+    private func addPins(point: CLLocationCoordinate2D) {
+        GeoCoding.getNameAndAddress(latitude: point.latitude, longitude: point.longitude, callback: {
+           (name,address) in
+            let annotation : MKPointAnnotation = MKPointAnnotation()
+            annotation.coordinate = point
+            annotation.title = name
+            annotation.subtitle = address
+            
+            PINS.add(annotation: annotation, mapView: self.mapView)
+            
+            self.showPoint(point: point)
+        })
     }
+    
     func showPoint(point: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: point, latitudinalMeters: 500, longitudinalMeters: 500)
         mapView.setRegion(region, animated: true)
     }
+    
     @objc func nowLocationTapped(_ sender: UIButton) {
         if nowLocationCoordinate == nil {
             var title: String = ""
@@ -151,12 +160,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         let alert = UIAlertController(title: (view.annotation?.title!)!, message: (view.annotation?.subtitle!)!, preferredStyle: UIAlertController.Style.alert)
         let okButton = UIAlertAction(title: "ピンを削除", style: UIAlertAction.Style.default, handler: {
             (action: UIAlertAction!) -> Void in
-
- //           PINS.remove(latitude: view.annotation!.coordinate.latitude, longitude: view.annotation!.coordinate.longitude)
-//            self.mapView.removeAnnotation(view.annotation!)
-            PINS.remove(annotation: view.annotation!, mapView: self.mapView)
-//書き換え予定
-
+                PINS.remove(annotation: view.annotation!, mapView: self.mapView)
         })
         alert.addAction(okButton)
         
@@ -194,6 +198,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             PINS.add(annotation: pin, mapView: self.mapView)
             
             self.showPoint(point: coordinate)
+        }
+    }
+}
+
+
+class GeoCoding {
+    /*
+    static func getLatitudeAndLongitude(searchWord: String, callback:(CLLocationDegrees,CLLocationDegrees)->Void) {
+        
+    }*/
+    
+    static func getNameAndAddress(latitude: CLLocationDegrees, longitude: CLLocationDegrees, callback: @escaping (String,String)->Void){
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            guard let placemark = placemarks?.first, error == nil else { return }
+            
+            let name = placemark.name ?? ""
+            var address = ""
+            if placemark.country != "日本" && placemark.country != "Japan" {
+                address += placemark.country ?? ""
+            }
+            address += placemark.administrativeArea ?? ""
+            address += placemark.locality ?? ""
+            address += placemark.thoroughfare ?? ""
+            address += placemark.subThoroughfare ?? ""
+                
+            callback(name,address)
         }
     }
 }
