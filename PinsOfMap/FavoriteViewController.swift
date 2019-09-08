@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class FavoriteViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,13 +17,24 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        PINS.registerUITableView(uitableview: tableView)
         return PINS.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel!.text = PINS[indexPath.row].title
+        cell.textLabel!.text = PINS.getTitle(index: indexPath.row)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("\(indexPath.row)")
+        let UINavigationController = tabBarController?.viewControllers?[0]
+        tabBarController?.selectedViewController = UINavigationController
+        
+        if let controller: ViewController = tabBarController?.viewControllers?[0] as? ViewController {
+            controller.showPoint(point: PINS.getPin(index: indexPath.row) )
+        }
     }
 
 }

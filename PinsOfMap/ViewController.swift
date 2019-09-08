@@ -9,14 +9,6 @@
 import UIKit
 import MapKit
 
-var PINS : [PIN] = []
-struct PIN {
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
-    var title: String
-    var subTitle: String
-}
-
 class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate {
     let manager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
@@ -160,15 +152,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         let okButton = UIAlertAction(title: "ピンを削除", style: UIAlertAction.Style.default, handler: {
             (action: UIAlertAction!) -> Void in
 
-            for index in 0...(PINS.count-1) {
-                if (PINS[index].latitude == view.annotation!.coordinate.latitude
-                    && PINS[index].longitude == view.annotation!.coordinate.longitude) {
-                    PINS.remove(at: index)
-                }
-            }
-
-            self.mapView.removeAnnotation(view.annotation!)
-            
+ //           PINS.remove(latitude: view.annotation!.coordinate.latitude, longitude: view.annotation!.coordinate.longitude)
+//            self.mapView.removeAnnotation(view.annotation!)
+            PINS.remove(annotation: view.annotation!, mapView: self.mapView)
+//書き換え予定
 
         })
         alert.addAction(okButton)
@@ -203,21 +190,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             
             pin.title = retName
             pin.subtitle = retAddress
-            self.mapView.addAnnotation(pin)
-            let latlng = (latitude: pin.coordinate.latitude, longitude: pin.coordinate.longitude)
+
+            PINS.add(annotation: pin, mapView: self.mapView)
             
-            // 同じ点には建てないこと
-            if(PINS.count > 0) {
-                for index in 0...(PINS.count-1) {
-                    if (PINS[index].latitude == latlng.latitude
-                        && PINS[index].longitude == latlng.longitude) {
-                        PINS.remove(at: index)
-                    }
-                }
-            }
-            PINS.append(PIN(latitude: latlng.latitude, longitude:latlng.longitude, title: retName!, subTitle:retAddress!))
             self.showPoint(point: coordinate)
-//            print (PINS)
         }
     }
 }

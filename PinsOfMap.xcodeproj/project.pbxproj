@@ -14,6 +14,7 @@
 		50D717AB232233EC00EB9AF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D717A9232233EC00EB9AF4 /* LaunchScreen.storyboard */; };
 		50D717B5232375BD00EB9AF4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D717B4232375BD00EB9AF4 /* SearchViewController.swift */; };
 		50D717B72323765700EB9AF4 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D717B62323765700EB9AF4 /* FavoriteViewController.swift */; };
+		F79EA582232545D400B69DD9 /* PINs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79EA581232545D400B69DD9 /* PINs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		50D717B4232375BD00EB9AF4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		50D717B62323765700EB9AF4 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		50D717C12323E47700EB9AF4 /* neer-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neer-me.png"; sourceTree = "<group>"; };
+		F79EA581232545D400B69DD9 /* PINs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				50D717A0232233EB00EB9AF4 /* AppDelegate.swift */,
 				50D717A2232233EB00EB9AF4 /* ViewController.swift */,
+				F79EA581232545D400B69DD9 /* PINs.swift */,
 				50D717A4232233EB00EB9AF4 /* Main.storyboard */,
 				50D717B62323765700EB9AF4 /* FavoriteViewController.swift */,
 				50D717B4232375BD00EB9AF4 /* SearchViewController.swift */,
@@ -146,6 +149,7 @@
 				50D717B5232375BD00EB9AF4 /* SearchViewController.swift in Sources */,
 				50D717A3232233EB00EB9AF4 /* ViewController.swift in Sources */,
 				50D717B72323765700EB9AF4 /* FavoriteViewController.swift in Sources */,
+				F79EA582232545D400B69DD9 /* PINs.swift in Sources */,
 				50D717A1232233EB00EB9AF4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
