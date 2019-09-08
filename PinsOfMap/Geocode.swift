@@ -18,7 +18,6 @@ class GeoCode {
             }
             callback(coordinate!)
         }
-     
      }
     
     static func getNameAndAddress(coordinate: CLLocationCoordinate2D, callback: @escaping (String,String,String)->Void){
