@@ -14,7 +14,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var longPressGesRec: UILongPressGestureRecognizer!
     
-    var pinsCount: Int = 0
     var nowLocationCoordinate: CLLocationCoordinate2D?
     var nowLocationLoading: Bool = true
     
@@ -50,6 +49,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         button.imageView?.contentMode = .scaleAspectFit
         self.view.addSubview(button)
         
+        PINS.reflectStoredPin(mapView: self.mapView)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

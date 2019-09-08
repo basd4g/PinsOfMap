@@ -162,7 +162,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="2ju-Wp-bb9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="I4g-bc-gXX"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map-icon-small" selectedImage="map-icon-small" id="I4g-bc-gXX"/>
                     <connections>
                         <outlet property="longPressGesRec" destination="R2K-7e-FZq" id="ZzY-gn-UrE"/>
                         <outlet property="mapView" destination="LIL-Jc-xT1" id="iXs-9S-dtV"/>
@@ -178,4 +178,7 @@
             <point key="canvasLocation" x="-78" y="505.99999999999994"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="map-icon-small" width="30" height="30"/>
+    </resources>
 </document>
