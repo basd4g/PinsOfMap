@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate, MKMapViewDelegate {
     let manager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet var longPressGesRec: UILongPressGestureRecognizer!
@@ -118,6 +118,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             return
         }
         showPoint(point: nowLocationCoordinate!)
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView?.animatesDrop = true
+        }
+        else {
+            pinView?.annotation = annotation
+        }
+        pinView?.pinTintColor = UIColor.purple
+        
+        return pinView
     }
 }
 
