@@ -134,9 +134,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         else {
             pinView?.annotation = annotation
         }
-        pinView?.pinTintColor = UIColor.purple
+        
+//        pinView?.pinTintColor = UIColor.purple
+        
+        pinView?.canShowCallout = true
+        
+        let rightButton: AnyObject! = UIButton(type: UIButton.ButtonType.detailDisclosure)
+        pinView?.rightCalloutAccessoryView = rightButton as? UIView
         
         return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("tapped")
+        print(#function)
+        let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
+        print(str)
+        
     }
 }
 
