@@ -17,7 +17,33 @@
                     <view key="view" contentMode="scaleToFill" id="14e-4y-pQg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P1O-Bo-BH9">
+                                <rect key="frame" x="0.0" y="20" width="414" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="k8T-v4-LXX">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k8T-v4-LXX" id="htd-ac-jSk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="eJ7-bR-FOU" id="XaO-T0-wYX"/>
+                                    <outlet property="delegate" destination="eJ7-bR-FOU" id="LpT-gH-cLI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6j3-tR-MQs" firstAttribute="trailing" secondItem="P1O-Bo-BH9" secondAttribute="trailing" id="C7F-L3-pyc"/>
+                            <constraint firstItem="6j3-tR-MQs" firstAttribute="bottom" secondItem="P1O-Bo-BH9" secondAttribute="bottom" id="Nfm-AH-OP0"/>
+                            <constraint firstItem="P1O-Bo-BH9" firstAttribute="leading" secondItem="6j3-tR-MQs" secondAttribute="leading" id="fb4-jD-6W2"/>
+                            <constraint firstItem="P1O-Bo-BH9" firstAttribute="top" secondItem="6j3-tR-MQs" secondAttribute="top" id="udI-gU-leM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6j3-tR-MQs"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="zOr-LB-QkE"/>
