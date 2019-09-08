@@ -107,20 +107,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     
     @objc func nowLocationTapped(_ sender: UIButton) {
         if nowLocationCoordinate == nil {
-            var title: String = ""
-            var message: String = ""
-            if nowLocationLoading == true {
-                title = "現在地を読み込み中"
-                message = "しばらくお待ちください"
+            let button = SimpleDialogButton(title: "OK", handler: {(action: UIAlertAction!) -> Void in print ("ok")})
+            
+            if nowLocationLoading {
+                SimpleDialog.make(
+                    title: "現在地を読み込み中",
+                    message: "しばらくお待ちください",
+                    simpleDialogButtons: [button],
+                    uiviewcontroller: self)
             } else {
-                title = "現在地が不明"
-                message = "現在地の読み込みに失敗しました"
+                SimpleDialog.make(
+                    title: "現在地が不明",
+                    message: "現在地の読み込みに失敗しました",
+                    simpleDialogButtons: [button],
+                    uiviewcontroller: self)
             }
-            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: {
-                (action: UIAlertAction!) -> Void in print ("ok")})
-            alert.addAction(okButton)
-            present(alert, animated: true, completion: nil)
             return
         }
         showPoint(point: nowLocationCoordinate!)
@@ -156,18 +157,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
 //        print(#function)
 //        let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
 //        print(str)
-        
-        let alert = UIAlertController(title: (view.annotation?.title!)!, message: (view.annotation?.subtitle!)!, preferredStyle: UIAlertController.Style.alert)
-        let okButton = UIAlertAction(title: "ピンを削除", style: UIAlertAction.Style.default, handler: {
-            (action: UIAlertAction!) -> Void in
+        let buttons = [
+            SimpleDialogButton(title:"ピンを削除",handler: {
+                (action: UIAlertAction!) -> Void in
                 PINS.remove(annotation: view.annotation!, mapView: self.mapView)
-        })
-        alert.addAction(okButton)
+            }),
+            SimpleDialogButton(title: "Cancel", handler: {
+                (action: UIAlertAction!) -> Void in return})
+        ]
+        SimpleDialog.make(title: (view.annotation?.title!)!, message: (view.annotation?.subtitle!)!, simpleDialogButtons: buttons, uiviewcontroller: self)
+    }
+}
+
+struct SimpleDialogButton {
+    var title: String
+    var handler: (UIAlertAction)->Void
+}
+
+class SimpleDialog{
+    static func make(title: String, message: String, simpleDialogButtons: [SimpleDialogButton],uiviewcontroller: UIViewController){
         
-        let cancelButton = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: {
-            (action: UIAlertAction!) -> Void in return})
-        alert.addAction(cancelButton)
-        
-        present(alert, animated: true, completion: nil)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    
+        for simpleDialogbutton in simpleDialogButtons {
+            let button = UIAlertAction(title: simpleDialogbutton.title, style: .default, handler: simpleDialogbutton.handler)
+            alert.addAction(button)
+        }
+        uiviewcontroller.present(alert, animated: true, completion: nil)
     }
 }
