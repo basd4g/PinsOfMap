@@ -9,10 +9,17 @@
 import MapKit
 
 class GeoCode {
-    /*
-     static func getLatitudeAndLongitude(searchWord: String, callback:(CLLocationDegrees,CLLocationDegrees)->Void) {
+    static func getLatitudeAndLongitude(searchWord: String, callback:@escaping (CLLocationCoordinate2D)->Void) {
+        var coordinate : CLLocationCoordinate2D? = nil
+        CLGeocoder().geocodeAddressString(searchWord) { placemarks, error in
+            coordinate = placemarks?.first?.location?.coordinate
+            if coordinate == nil {
+                return
+            }
+            callback(coordinate!)
+        }
      
-     }*/
+     }
     
     static func getNameAndAddress(coordinate: CLLocationCoordinate2D, callback: @escaping (String,String,String)->Void){
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)

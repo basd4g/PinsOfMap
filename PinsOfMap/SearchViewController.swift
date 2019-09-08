@@ -34,7 +34,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             return
         }
         
-        geocoding(address: searchBar.text!)
+//        geocoding(address: searchBar.text!)
+        GeoCode.getLatitudeAndLongitude(searchWord: searchBar.text!){
+            coordinate in
+            GeoCode.getNameAndAddress(coordinate: coordinate){
+                (name,zipCode,address) in
+                self.placeName.text = "施設名: \(name)"
+                self.placeZipCode.text = "〒 \(zipCode)"
+                self.placeAddress.text = "住所: \(address)"
+                self.coordinate = coordinate
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -42,7 +52,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             searchBar.resignFirstResponder()
         }
     }
-    
+    /*
     private func geocoding(address: String){
         var coordinate : CLLocationCoordinate2D? = nil
         CLGeocoder().geocodeAddressString(address) { placemarks, error in
@@ -50,8 +60,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             if coordinate == nil {
                 return
             }
-            print("緯度:\(coordinate!.latitude), 経度:\(coordinate!.longitude)")
-//            self.revGeocoding(coordinate: coordinate!)
             GeoCode.getNameAndAddress(coordinate: coordinate!){
                 (name,zipCode,address) in
                 self.placeName.text = "施設名: \(name)"
@@ -59,7 +67,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
                 self.placeAddress.text = "住所: \(address)"
                 self.coordinate = coordinate!
             }
-
         }
     }
 
@@ -85,7 +92,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             
             self.coordinate = coordinate
         }
-    }
+    }*/
     
     @IBAction func ViewOnMapButtonTapped(_ sender: UIButton) {
         if coordinate == nil {
