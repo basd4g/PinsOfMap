@@ -79,6 +79,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             self.coordinate = coordinate
         }
     }
+    
     @IBAction func ViewOnMapButtonTapped(_ sender: UIButton) {
         if coordinate == nil {
             return

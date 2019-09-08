@@ -90,10 +90,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         let pin : MKPointAnnotation = MKPointAnnotation()
         pin.coordinate = point
         pinsCount += 1
-        pin.title = "Pin\(pinsCount)"
-//        pin.subtitle = "subtitle（show if you tapped）"
-        mapView.addAnnotation(pin)
-        showPoint(point: point)
+        revGeocoding(coordinate: point, pin: pin)
     }
     func showPoint(point: CLLocationCoordinate2D) {
         let region = MKCoordinateRegion(center: point, latitudinalMeters: 500, longitudinalMeters: 500)
@@ -151,6 +148,36 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
         print(str)
         
+        //削除
+//        self.mapView.removeAnnotation(view.annotation!)
+        
+    }
+
+    private func revGeocoding(coordinate: CLLocationCoordinate2D, pin: MKPointAnnotation){
+        var retName: String?
+        var retAddress: String?
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+            guard let placemark = placemarks?.first, error == nil else { return }
+            
+            let voidStr = ""
+            
+            retName = "\(placemark.name ?? voidStr)"
+            var address = ""
+            if placemark.country != "日本" && placemark.country != "Japan" {
+                address += "\(placemark.country ?? voidStr) "
+            }
+            address += placemark.administrativeArea ?? ""
+            address += placemark.locality ?? ""
+            address += placemark.thoroughfare ?? ""
+            address += placemark.subThoroughfare ?? ""
+            retAddress = address
+            
+            pin.title = retName
+            pin.subtitle = retAddress
+            self.mapView.addAnnotation(pin)
+            self.showPoint(point: coordinate)
+        }
     }
 }
 
