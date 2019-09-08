@@ -168,21 +168,3 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
         SimpleDialog.make(title: (view.annotation?.title!)!, message: (view.annotation?.subtitle!)!, simpleDialogButtons: buttons, uiviewcontroller: self)
     }
 }
-
-struct SimpleDialogButton {
-    var title: String
-    var handler: (UIAlertAction)->Void
-}
-
-class SimpleDialog{
-    static func make(title: String, message: String, simpleDialogButtons: [SimpleDialogButton],uiviewcontroller: UIViewController){
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    
-        for simpleDialogbutton in simpleDialogButtons {
-            let button = UIAlertAction(title: simpleDialogbutton.title, style: .default, handler: simpleDialogbutton.handler)
-            alert.addAction(button)
-        }
-        uiviewcontroller.present(alert, animated: true, completion: nil)
-    }
-}

@@ -16,6 +16,7 @@
 		50D717B72323765700EB9AF4 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D717B62323765700EB9AF4 /* FavoriteViewController.swift */; };
 		F79EA582232545D400B69DD9 /* PINs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79EA581232545D400B69DD9 /* PINs.swift */; };
 		F79EA58423254BB500B69DD9 /* Geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79EA58323254BB500B69DD9 /* Geocode.swift */; };
+		F79EA586232552C800B69DD9 /* SimpleDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79EA585232552C800B69DD9 /* SimpleDialog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		50D717C12323E47700EB9AF4 /* neer-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neer-me.png"; sourceTree = "<group>"; };
 		F79EA581232545D400B69DD9 /* PINs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINs.swift; sourceTree = "<group>"; };
 		F79EA58323254BB500B69DD9 /* Geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocode.swift; sourceTree = "<group>"; };
+		F79EA585232552C800B69DD9 /* SimpleDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDialog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				50D717A0232233EB00EB9AF4 /* AppDelegate.swift */,
+				F79EA585232552C800B69DD9 /* SimpleDialog.swift */,
 				50D717A2232233EB00EB9AF4 /* ViewController.swift */,
 				F79EA58323254BB500B69DD9 /* Geocode.swift */,
 				F79EA581232545D400B69DD9 /* PINs.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D717B5232375BD00EB9AF4 /* SearchViewController.swift in Sources */,
+				F79EA586232552C800B69DD9 /* SimpleDialog.swift in Sources */,
 				50D717A3232233EB00EB9AF4 /* ViewController.swift in Sources */,
 				50D717B72323765700EB9AF4 /* FavoriteViewController.swift in Sources */,
 				F79EA582232545D400B69DD9 /* PINs.swift in Sources */,
