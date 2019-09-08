@@ -143,13 +143,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("tapped")
-        print(#function)
-        let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
-        print(str)
+//        print("tapped")
+//        print(#function)
+//        let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
+//        print(str)
         
-        //削除
-//        self.mapView.removeAnnotation(view.annotation!)
+        let alert = UIAlertController(title: (view.annotation?.title!)!, message: (view.annotation?.subtitle!)!, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "ピンを削除", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) -> Void in self.mapView.removeAnnotation(view.annotation!)})
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
         
     }
 
