@@ -59,8 +59,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("locations: \(locations)")
-        
         nowLocationCoordinate = locations[0].coordinate
         nowLocationLoading = false
     }
@@ -72,17 +70,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
 
     @IBAction func mapViewDidLongPress(_ sender: UIGestureRecognizer) {
-        if sender.state == .began {
-            //tap start
-            print(".start")
-        } else if sender.state == .ended {
-            //tap finish
-            print(".finish")
+        if sender.state == .ended {
             let tapPoint = sender.location(in: view)
             let center = mapView.convert(tapPoint, toCoordinateFrom: mapView)
             addPins(point: center)
-            
-            
         }
     }
     
@@ -107,7 +98,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     
     @objc func nowLocationTapped(_ sender: UIButton) {
         if nowLocationCoordinate == nil {
-            let button = SimpleDialogButton(title: "OK", handler: {(action: UIAlertAction!) -> Void in print ("ok")})
+            let button = SimpleDialogButton(title: "OK", handler: {(action: UIAlertAction!) -> Void in return})
             
             if nowLocationLoading {
                 SimpleDialog.make(
@@ -142,8 +133,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
             pinView?.annotation = annotation
         }
         
-//        pinView?.pinTintColor = UIColor.purple
-        
         pinView?.canShowCallout = true
         
         let rightButton: AnyObject! = UIButton(type: UIButton.ButtonType.detailDisclosure)
@@ -153,10 +142,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        print("tapped")
-//        print(#function)
-//        let str: String = view.annotation?.title == nil ?  "" : (view.annotation?.title!)!
-//        print(str)
         let buttons = [
             SimpleDialogButton(title:"ピンを削除",handler: {
                 (action: UIAlertAction!) -> Void in

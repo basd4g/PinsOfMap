@@ -28,7 +28,6 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("\(indexPath.row)")
         let UINavigationController = tabBarController?.viewControllers?[0]
         tabBarController?.selectedViewController = UINavigationController
         

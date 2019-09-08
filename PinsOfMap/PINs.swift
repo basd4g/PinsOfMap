@@ -31,7 +31,6 @@ class PINs {
     }
     public func reloadUITableView(){
         if uitableview != nil {
-            print("reloadUITableView")
             uitableview!.reloadData()
         }
     }
