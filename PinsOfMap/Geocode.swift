@@ -14,13 +14,14 @@ class GeoCode {
      
      }*/
     
-    static func getNameAndAddress(latitude: CLLocationDegrees, longitude: CLLocationDegrees, callback: @escaping (String,String)->Void){
-        let location = CLLocation(latitude: latitude, longitude: longitude)
+    static func getNameAndAddress(coordinate: CLLocationCoordinate2D, callback: @escaping (String,String,String)->Void){
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             guard let placemark = placemarks?.first, error == nil else { return }
             
             let name = placemark.name ?? ""
+            let zipCode = placemark.postalCode ?? ""
             var address = ""
             if placemark.country != "日本" && placemark.country != "Japan" {
                 address += placemark.country ?? ""
@@ -30,7 +31,7 @@ class GeoCode {
             address += placemark.thoroughfare ?? ""
             address += placemark.subThoroughfare ?? ""
             
-            callback(name,address)
+            callback(name,zipCode,address)
         }
     }
 }

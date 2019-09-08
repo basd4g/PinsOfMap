@@ -78,8 +78,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, UIGestureReco
     }
     
     private func addPins(point: CLLocationCoordinate2D) {
-        GeoCode.getNameAndAddress(latitude: point.latitude, longitude: point.longitude, callback: {
-           (name,address) in
+        GeoCode.getNameAndAddress(coordinate: point, callback: {
+           (name,_,address) in
             let annotation : MKPointAnnotation = MKPointAnnotation()
             annotation.coordinate = point
             annotation.title = name
