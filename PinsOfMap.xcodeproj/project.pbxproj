@@ -33,6 +33,7 @@
 		F79EA581232545D400B69DD9 /* PINs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINs.swift; sourceTree = "<group>"; };
 		F79EA58323254BB500B69DD9 /* Geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocode.swift; sourceTree = "<group>"; };
 		F79EA585232552C800B69DD9 /* SimpleDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDialog.swift; sourceTree = "<group>"; };
+		F7C78B382325911B00114CE2 /* 00Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = 00Readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 				F79EA58323254BB500B69DD9 /* Geocode.swift */,
 				F79EA581232545D400B69DD9 /* PINs.swift */,
 				50D717A4232233EB00EB9AF4 /* Main.storyboard */,
+				F7C78B382325911B00114CE2 /* 00Readme.md */,
 				50D717B62323765700EB9AF4 /* FavoriteViewController.swift */,
 				50D717B4232375BD00EB9AF4 /* SearchViewController.swift */,
 				50D717A7232233EC00EB9AF4 /* Assets.xcassets */,
